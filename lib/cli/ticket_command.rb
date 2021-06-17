@@ -7,8 +7,7 @@ module CLI
     option '--_id', '', 'Ticket Id'
     option '--created_at', '', 'Ticket Creation Timestamp'
     option '--type', '', 'Ticket Type'
-    option '--subject', '', 'Ticket Subject'
-    option '--assignee_id', '', 'Ticket Assigner Id' do |s|
+    option '--assignee_id', '', 'Ticket Assignee Id (Should be a number)' do |s|
       Integer(s)
     end
     option '--tags', '', 'Ticket Tags', multivalued: true

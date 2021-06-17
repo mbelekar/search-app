@@ -16,6 +16,14 @@ describe CLI::TicketCommand do
     allow(Application).to receive(:new).and_return(mock_app)
   end
 
+  context 'when help' do
+    let(:help_output) { tickets_help_output }
+
+    it 'describes usage when help method is invoked' do
+      expect(cmd.help).to match(help_output)
+    end
+  end
+
   context 'when called with no options' do
     it 'raises help error' do
       expect { cmd.run([]) }.to raise_error(Clamp::UsageError)
