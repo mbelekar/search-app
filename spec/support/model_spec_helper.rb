@@ -14,7 +14,8 @@ module ModelSpecHelper
         created_at: '2021-05-31T11:00:00',
         type: 'email',
         subject: 'foo',
-        assignee_id: 111
+        assignee_id: 111,
+        tags: ['baz', 'qux']
       }
   end
 end

@@ -19,7 +19,8 @@ module Models
         'created_at' => created_at,
         'type' => type,
         'subject' => subject,
-        'assignee_id' => assignee_id
+        'assignee_id' => assignee_id,
+        'tags' => tags
       }
     end
   end
