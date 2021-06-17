@@ -12,6 +12,7 @@ module CLI
     end
 
     def execute
+      signal_usage_error 'You must select atleast one option' unless any_option_selected?
     end
   end
 end

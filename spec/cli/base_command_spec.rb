@@ -8,14 +8,14 @@ describe CLI::BaseCommand do
   context 'when #to_bool' do
     context 'with correct input' do
       it 'does not raise an error if input is String and is either \'true\' or \'false\'' do
-        ['true', 'false'].each do |val|
-          expect { cmd.to_bool(val) }.to_not raise_error
+        %w[true false].each do |val|
+          expect { cmd.to_bool(val) }.not_to raise_error
         end
       end
 
       it 'does not raise an error if input is Boolean and is either true or false' do
         [true, false].each do |val|
-          expect { cmd.to_bool(val) }.to_not raise_error
+          expect { cmd.to_bool(val) }.not_to raise_error
         end
       end
     end
