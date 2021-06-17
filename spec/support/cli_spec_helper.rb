@@ -7,6 +7,7 @@ module CliSpecHelper
       _id: 'sdfkhjf',
       created_at: '2021-05-21T09:30:00',
       type: 'foo',
+      subject: 'bar',
       assignee_id: 1,
       tags: %w[baz qux]
     }
@@ -51,6 +52,7 @@ module CliSpecHelper
         --_id             Ticket Id
         --created_at      Ticket Creation Timestamp
         --type            Ticket Type
+        --subject         Ticket Subject
         --assignee_id     Ticket Assignee Id (Should be a number)
         --tags            Ticket Tags
         -h, --help        print help
