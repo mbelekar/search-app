@@ -25,6 +25,15 @@ module CLI
         %i[@invocation_path @context @remaining_arguments].include?(val)
       end
     end
+
+    def options_h
+      options = {}
+      selected_options.each do |opt|
+        key = opt.to_s.sub('@', '').sub('_list','').to_sym
+        options[key] = instance_variable_get(opt)
+      end
+      options
+    end
     # rubocop:enable Lint/DuplicateMethods
   end
 end
