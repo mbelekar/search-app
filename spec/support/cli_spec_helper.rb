@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module CliSpecHelper
+  # rubocop:disable Layout/HeredocIndentation
   def opt_h_ticket
     {
       _id: 'sdfkhjf',
@@ -55,4 +56,5 @@ module CliSpecHelper
         -h, --help        print help
     DOC
   end
+  # rubocop:enable Layout/HeredocIndentation
 end
