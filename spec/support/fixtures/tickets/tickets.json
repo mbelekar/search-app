@@ -1,0 +1,27 @@
+[
+  {
+  "_id": "545-fhj-87hg8",
+  "created_at": "2016-04-28T11:19:34-10:00",
+  "type": "incident",
+  "subject": "foo",
+  "assignee_id": 1,
+  "tags": [
+    "bar",
+    "baz",
+    "qux"
+  ]
+},
+{
+  "_id": "34357-fh7gy77",
+  "created_at": "2016-04-14T08:32:31-10:00",
+  "type": "foo",
+  "subject": "bar",
+  "assignee_id": 2,
+  "tags": [
+    "bar",
+    "baz",
+    "qux",
+    "quux"
+  ]
+}
+]

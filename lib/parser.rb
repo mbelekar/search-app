@@ -34,7 +34,14 @@ class Parser < Oj::ScHandler
     puts "ERROR: #{message} at line #{line}, column #{column}"
   end
 
-  def parse_file(fh)
+  def parse_file(filename)
+    fh = File.open(filename, 'r')
+    parse_f(fh)
+    fh.close
+  end
+
+  private
+  def parse_f(fh)
     Oj.sc_parse(self, fh)
   end
 end

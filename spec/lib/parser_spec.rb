@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'tempfile'
 require './lib/parser'
+require 'support/custom_matchers'
 
-Describe Parser do
+describe Parser do
   subject(:parser) { described_class.new }
 
   describe '#hash_start' do
@@ -15,10 +15,8 @@ Describe Parser do
   describe '#parse_file' do
     let(:fh) { double }
 
-    it 'parses json successfully' do
-      allow(Oj).to receive(:sc_parse).with(parser, fh)
-      parser.parse_file(fh)
-      expect(Oj).to have_received(:sc_parse).with(parser, fh).once
+    it 'calls #Oj.sc_parse with correct args' do
+      is_expected.to pass_file_to_parser(Oj, :sc_parse, parser, 'foo')
     end
   end
 
