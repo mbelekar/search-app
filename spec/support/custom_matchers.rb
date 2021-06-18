@@ -25,11 +25,11 @@ RSpec::Matchers.define :invoke_subcommand do |klass, cmd|
 end
 
 RSpec::Matchers.define :pass_each_file_from_config_to_parser do |config, parser, loader|
-  match do |subject|
+  match do |_subject|
     begin
       keys = config.keys
       allow(config).to receive(:each).and_yield(keys[0], config[keys[0]])\
-                                    .and_yield(keys[1], config[keys[1]])
+                                     .and_yield(keys[1], config[keys[1]])
       allow(parser).to receive(:parse_file).with("#{config[keys[0]]}/#{keys[0]}.json")
       allow(parser).to receive(:parse_file).with("#{config[keys[1]]}/#{keys[1]}.json")
       loader.call
@@ -41,7 +41,7 @@ RSpec::Matchers.define :pass_each_file_from_config_to_parser do |config, parser,
     end
   end
 
-  failure_message do |subject|
+  failure_message do |_subject|
     <<~MESSAGE
       expected loader to pass all files from config to the parser but failed with error:
       #{@error}
@@ -50,7 +50,7 @@ RSpec::Matchers.define :pass_each_file_from_config_to_parser do |config, parser,
 end
 
 RSpec::Matchers.define :pass_file_to_parser do |klass, method, parser, file|
-  match do |subject|
+  match do |_subject|
     begin
       allow(File).to receive(:open).with(file, 'r').and_return(fh)
       allow(fh).to receive(:close)
@@ -63,7 +63,7 @@ RSpec::Matchers.define :pass_file_to_parser do |klass, method, parser, file|
     end
   end
 
-  failure_message do |subject|
+  failure_message do |_subject|
     <<~MESSAGE
       expected parser to pass file to #Oj.sc_parse but failed with error:
       #{@error}

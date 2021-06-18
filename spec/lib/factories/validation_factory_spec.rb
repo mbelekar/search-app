@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/factories/validation_factory'
 
 describe Factories::ValidationFactory do
@@ -11,7 +13,7 @@ describe Factories::ValidationFactory do
     end
 
     it 'raises error for invalid type' do
-        expect { factory.for('foo') }.to raise_error(factory::InvalidContractTypeError)
+      expect { factory.for('foo') }.to raise_error(factory::InvalidContractTypeError)
     end
   end
 end

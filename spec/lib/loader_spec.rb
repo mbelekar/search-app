@@ -16,16 +16,15 @@ describe Loader do
 
   context 'when load' do
     context 'with correct config' do
-
       it 'passes file path to the parser' do
-        is_expected.to pass_each_file_from_config_to_parser(config, parser, loader)
+        expect(loader).to pass_each_file_from_config_to_parser(config, parser, loader)
       end
     end
 
     context 'with incorrect config' do
       it 'raises error' do
         allow(config).to receive(:each).and_yield('users', 'spec/support/users')\
-                                        .and_yield('tickets','spec/support/tickets')
+                                       .and_yield('tickets', 'spec/support/tickets')
 
         expect { loader.call }.to raise_error(Loader::InvalidFilePathError)
       end

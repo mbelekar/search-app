@@ -16,7 +16,7 @@ describe Parser do
     let(:fh) { double }
 
     it 'calls #Oj.sc_parse with correct args' do
-      is_expected.to pass_file_to_parser(Oj, :sc_parse, parser, 'foo')
+      expect(parser).to pass_file_to_parser(Oj, :sc_parse, parser, 'foo')
     end
   end
 

@@ -41,6 +41,7 @@ class Parser < Oj::ScHandler
   end
 
   private
+
   def parse_f(fh)
     Oj.sc_parse(self, fh)
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/factories/model_factory'
 
 describe Factories::ModelFactory do
@@ -11,7 +13,7 @@ describe Factories::ModelFactory do
     end
 
     it 'raises error for invalid type' do
-        expect { factory.for('foo') }.to raise_error(factory::InvalidModelTypeError)
+      expect { factory.for('foo') }.to raise_error(factory::InvalidModelTypeError)
     end
   end
 end
