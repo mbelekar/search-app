@@ -22,5 +22,20 @@ module ValidationSpecHelper
   end
 
   def user_contr
+    {
+      _id: 100,
+      name: 'foo',
+      created_at: '2021-05-21T10:30:00',
+      verified: true
+    }
+  end
+
+  def incorrect_user_contr
+    {
+      _id: 'abc',
+      name: 123,
+      created_at: '2021-05-21T10:30:00',
+      verified: 345
+    }
   end
 end
