@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ModelSpecHelper
   def user_h
     {
@@ -10,12 +12,12 @@ module ModelSpecHelper
 
   def ticket_h
     {
-        _id: 'ydfjf',
-        created_at: '2021-05-31T11:00:00',
-        type: 'email',
-        subject: 'foo',
-        assignee_id: 111,
-        tags: ['baz', 'qux']
-      }
+      _id: 'ydfjf',
+      created_at: '2021-05-31T11:00:00',
+      type: 'email',
+      subject: 'foo',
+      assignee_id: 111,
+      tags: %w[baz qux]
+    }
   end
 end

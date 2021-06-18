@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ValidationSpecHelper
   def ticket_contr
     {
@@ -6,7 +8,7 @@ module ValidationSpecHelper
       type: 'foo',
       subject: 'bar',
       assignee_id: 111,
-      tags: ['baz', 'qux']
+      tags: %w[baz qux]
     }
   end
 
@@ -17,7 +19,7 @@ module ValidationSpecHelper
       status: 'closed',
       subject: 'bar',
       assignee_id: 111,
-      tags: ['baz', 'qux']
+      tags: %w[baz qux]
     }
   end
 
