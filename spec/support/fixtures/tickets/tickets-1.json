@@ -1,0 +1,27 @@
+[
+  {
+  "_id": "38746dfg-tth-lk23",
+  "created_at": "2016-04-28T11:19:34-10:00",
+  "type": "quux",
+  "subject": "quuz",
+  "assignee_id": 3,
+  "tags": [
+    "quux",
+    "quuz",
+    "qux"
+  ]
+},
+{
+  "_id": "294jgf-3wrii-45ng",
+  "created_at": "2016-04-14T08:32:31-10:00",
+  "type": "waldo",
+  "subject": "fred",
+  "assignee_id": 4,
+  "tags": [
+    "quux",
+    "quuz",
+    "qux",
+    "waldo"
+  ]
+}
+]

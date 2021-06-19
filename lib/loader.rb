@@ -3,11 +3,11 @@
 class Loader
   class InvalidFilePathError < StandardError; end
 
-  attr_reader :data, :data_by_type, :config, :parser
+  attr_reader :data, :data_for_type, :config, :parser
 
   def initialize(config, parser)
     @data = {}
-    @data_by_type = []
+    @data_for_type = []
     @parser = parser
     @config = config
   end
@@ -23,13 +23,14 @@ class Loader
   private
 
   def load_files(key, path)
-    @data_by_type = []
+    @data_for_type = []
     files_list(path).each { |filename| load(filename) }
-    @data[key] = @data_by_type
+    @data[key] = @data_for_type
   end
 
   def load(filename)
-    @data_by_type.push(*@parser.parse_file(filename))
+    @parser.parse_file(filename)
+    @data_for_type.push(*parser.data)
   end
 
   def files_list(path)

@@ -120,5 +120,8 @@ RSpec/IdenticalEqualityAssertion: # (new in 2.4)
 RSpec/Rails/AvoidSetupHook: # (new in 2.4)
   Enabled: false
 
+RSpec/NestedGroups:
+  Max: 4
+
 AllCops:
     SuggestExtensions: false

@@ -35,14 +35,16 @@ class Parser < Oj::ScHandler
   end
 
   def parse_file(filename)
+    @data = []
     fh = File.open(filename, 'r')
-    parse_f(fh)
+    Oj.sc_parse(self, fh)
     fh.close
+    flatten_data
   end
 
   private
 
-  def parse_f(fh)
-    Oj.sc_parse(self, fh)
+  def flatten_data
+    @data.flatten!
   end
 end

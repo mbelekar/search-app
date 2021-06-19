@@ -7,8 +7,8 @@ module Factories
   class ModelFactory
     class InvalidModelTypeError < StandardError; end
     MODELS = {
-      ticket: Models::Ticket,
-      user: Models::User
+      tickets: Models::Ticket,
+      users: Models::User
     }.freeze
 
     def self.for(type)

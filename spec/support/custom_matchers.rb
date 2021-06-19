@@ -24,17 +24,20 @@ RSpec::Matchers.define :invoke_subcommand do |klass, cmd|
   end
 end
 
-RSpec::Matchers.define :pass_each_file_from_config_to_parser do |config, parser, loader|
-  match do |_subject|
+RSpec::Matchers.define :load_files_for_type do |parser, file_path, **kwargs|
+  match do |subject|
     begin
-      keys = config.keys
-      allow(config).to receive(:each).and_yield(keys[0], config[keys[0]])\
-                                     .and_yield(keys[1], config[keys[1]])
-      allow(parser).to receive(:parse_file).with("#{config[keys[0]]}/#{keys[0]}.json")
-      allow(parser).to receive(:parse_file).with("#{config[keys[1]]}/#{keys[1]}.json")
-      loader.call
-      expect(parser).to have_received(:parse_file).with("#{config[keys[0]]}/#{keys[0]}.json")
-      expect(parser).to have_received(:parse_file).with("#{config[keys[1]]}/#{keys[1]}.json")
+      type = kwargs[:type].to_sym
+      files = Dir.glob("#{file_path}/*")
+
+      files.each do |file|
+        allow(parser).to receive(:parse_file).with(file)
+      end
+
+      allow(parser).to receive(:data).and_return(*kwargs[:stubbed_ret])
+
+      subject.send(:load_files, type, file_path)
+      expect(loader.data[type]).to eq(kwargs[:expected])
     rescue RSpec::Expectations::ExpectationNotMetError => e
       @error = e
       raise
@@ -43,7 +46,7 @@ RSpec::Matchers.define :pass_each_file_from_config_to_parser do |config, parser,
 
   failure_message do |_subject|
     <<~MESSAGE
-      expected loader to pass all files from config to the parser but failed with error:
+      expected loader to load all files from #{file_path} but failed with error:
       #{@error}
     MESSAGE
   end

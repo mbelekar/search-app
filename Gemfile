@@ -9,7 +9,8 @@ gem 'oj', '~> 3.11'
 gem 'rake', '~> 13.0'
 
 group 'development' do
-  gem 'pry', '~> 0.14'
+  gem 'pry', '~> 0.13'
+  gem 'pry-byebug', '~> 3.9'
   gem 'rspec', '~> 3.10'
   gem 'rubocop', '~> 1.9.1', require: false
   gem 'rubocop-rspec', '~> 2.4'

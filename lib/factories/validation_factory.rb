@@ -7,8 +7,8 @@ module Factories
   class ValidationFactory
     class InvalidContractTypeError < StandardError; end
     VALIDATIONS = {
-      ticket: Validations::TicketContract,
-      user: Validations::UserContract
+      tickets: Validations::TicketContract,
+      users: Validations::UserContract
     }.freeze
 
     def self.for(type)
