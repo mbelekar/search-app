@@ -3,7 +3,7 @@
 require './lib/cli/main_command'
 require './lib/cli/ticket_command'
 require './lib/application'
-require 'support/cli_spec_helper'
+require 'support/spec_helpers/cli_spec_helper'
 
 describe CLI::TicketCommand do
   include CliSpecHelper

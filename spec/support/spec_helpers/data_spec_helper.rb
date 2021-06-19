@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module LoaderSpecHelper
+module DataSpecHelper
   # rubocop:disable Metrics/MethodLength
   def user_data
     [

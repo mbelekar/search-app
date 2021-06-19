@@ -20,4 +20,8 @@ module ModelSpecHelper
       tags: %w[baz qux]
     }
   end
+
+  def model_data(data, model)
+    data.map { |d| model.new(d) }
+  end
 end

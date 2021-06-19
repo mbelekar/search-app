@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require './lib/models/ticket'
-require 'support/model_spec_helper'
+require 'support/spec_helpers/model_spec_helper'
 
 describe Models::Ticket do
   include ModelSpecHelper

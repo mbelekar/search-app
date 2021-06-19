@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require './lib/validations/user_contract'
-require 'support/validation_spec_helper'
+require 'support/spec_helpers/validation_spec_helper'
 
 describe Validations::UserContract do
   include ValidationSpecHelper
