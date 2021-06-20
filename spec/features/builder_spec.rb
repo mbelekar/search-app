@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require './lib/builder'
-require 'support/data_spec_helper'
-require 'support/model_spec_helper'
+require 'support/spec_helpers/data_spec_helper'
+require 'support/spec_helpers/model_spec_helper'
 require 'support/custom_matchers'
 
 describe Builder do
@@ -27,6 +27,7 @@ describe Builder do
 
   context 'when build tickets data' do
     subject(:builder) { described_class.new('tickets') }
+
     let(:data) { parsed_files_data_t }
     let(:expected) { model_data(data, builder.model) }
 

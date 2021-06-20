@@ -123,5 +123,11 @@ RSpec/Rails/AvoidSetupHook: # (new in 2.4)
 RSpec/NestedGroups:
   Max: 4
 
+RSpec/MultipleExpectations:
+  Max: 2
+
+Metrics/ModuleLength:
+  Max: 110
+
 AllCops:
     SuggestExtensions: false

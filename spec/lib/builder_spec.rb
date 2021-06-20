@@ -26,6 +26,7 @@ describe Builder do
 
   describe '#call' do
     let(:data) { user_h }
+
     it 'does contract validation' do
       allow(builder.contract).to receive(:validate).with(data).and_return(data)
       allow(builder.model).to receive(:new).with(data)
@@ -44,7 +45,7 @@ describe Builder do
       allow(builder.contract).to receive(:validate).with(data).and_return(nil)
       allow(builder.model).to receive(:new).with(data)
       builder.call([data])
-      expect(builder.model).not_to receive(:new)
+      expect(builder.model).not_to have_received(:new)
     end
   end
 end

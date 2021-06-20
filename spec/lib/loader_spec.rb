@@ -48,7 +48,7 @@ describe Loader do
         end
 
         it 'loads users data from multiple files in expected format' do
-          is_expected.to load_files_for_type(parser, file_path, kwargs)
+          expect(loader).to load_files_for_type(parser, file_path, kwargs)
         end
       end
 
@@ -63,7 +63,7 @@ describe Loader do
         end
 
         it 'loads tickets data from multiple files in expected format' do
-          is_expected.to load_files_for_type(parser, file_path, kwargs)
+          expect(loader).to load_files_for_type(parser, file_path, kwargs)
         end
       end
     end
