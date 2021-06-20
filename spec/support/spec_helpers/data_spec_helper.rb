@@ -25,13 +25,13 @@ module DataSpecHelper
         _id: 3,
         name: 'baz',
         created_at: '2016-04-15T05:19:46-10:00',
-        verified: true
+        verified: false
       },
       {
         _id: 4,
         name: 'qux',
         created_at: '2016-06-23T10:31:39-10:00',
-        verified: true
+        verified: false
       }
     ]
   end
@@ -102,6 +102,13 @@ module DataSpecHelper
 
   def parsed_files_data_t
     ticket_data.concat(ticket_data_a)
+  end
+
+  def parsed_files_data
+    {
+      'users' => user_data_a.concat(user_data),
+      'tickets' => ticket_data_a.concat(ticket_data)
+    }
   end
   # rubocop:enable Metrics/MethodLength
 end
