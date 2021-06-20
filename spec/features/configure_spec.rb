@@ -37,10 +37,6 @@ describe Configure do
       actual = configure.data
       actual["users"] = model_to_h(actual["users"])
       actual["tickets"] = model_to_h(actual["tickets"])
-      # configure.data.each|a|
-      #   expect(a).to be_instance_of(Models::Ticket)
-      #   expect(a.to_h).to eq(expected[i].to_h)
-      # end
       expect(actual).to eq(expected)
     end
   end
