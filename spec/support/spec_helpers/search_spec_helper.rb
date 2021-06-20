@@ -4,15 +4,14 @@ module SearchSpecHelper
   # rubocop:disable Metrics/MethodLength
   def process_user_results(results)
     res = []
-    rec = {
-      users: [],
-      related: {
-        tickets: []
-      }
-    }
+
     results.each do |result|
-      rec[:users] = result[:users].to_h
-      rec[:related][:tickets] = result[:related][:tickets].to_a.map(&:to_h)
+      rec = {
+        users: result[:users].to_h,
+        related: {
+          tickets: result[:related][:tickets].to_a.map(&:to_h)
+        }
+      }
       res.push(rec)
     end
     res
@@ -20,15 +19,14 @@ module SearchSpecHelper
 
   def process_ticket_results(results)
     res = []
-    rec = {
-      tickets: [],
-      related: {
-        users: []
-      }
-    }
+
     results.each do |result|
-      rec[:tickets] = result[:tickets].to_h
-      rec[:related][:users] = result[:related][:users].to_a.map(&:to_h)
+      rec = {
+        tickets: result[:tickets].to_h,
+        related: {
+          users: result[:related][:users].to_a.map(&:to_h)
+        }
+      }
       res.push(rec)
     end
     res

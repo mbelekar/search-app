@@ -13,7 +13,7 @@ describe CLI::UserCommand do
   let(:mock_app) { instance_double(Application) }
 
   before do
-    allow(Application).to receive(:new).and_return(mock_app)
+    allow(Application).to receive(:new).with(:users).and_return(mock_app)
   end
 
   context 'when help' do
@@ -32,15 +32,15 @@ describe CLI::UserCommand do
 
   context 'when called with options' do
     it 'returns true if options are selected' do
-      allow(mock_app).to receive(:run).with(:users, { _id: 1, name: 'foo' })
+      allow(mock_app).to receive(:run).with({ _id: 1, name: 'foo' })
       cmd.run(['--_id=1', '--name=foo'])
       expect(cmd.any_option_selected?).to be true
     end
 
     it 'passes options to the method' do
-      allow(mock_app).to receive(:run).with(:users, { _id: 1, name: 'foo' })
+      allow(mock_app).to receive(:run).with({ _id: 1, name: 'foo' })
       cmd.run(['--_id=1', '--name=foo'])
-      expect(mock_app).to have_received(:run).with(:users, { _id: 1, name: 'foo' }).once
+      expect(mock_app).to have_received(:run).with({ _id: 1, name: 'foo' }).once
     end
 
     context 'when incorrect type' do
@@ -48,7 +48,7 @@ describe CLI::UserCommand do
 
       it 'raises error' do
         opt_h.each do |key, value|
-          allow(mock_app).to receive(:run).with(:users, { key => value })
+          allow(mock_app).to receive(:run).with({ key => value })
           expect { cmd.run(["--#{key}=#{value}"]) }.to raise_error(Clamp::UsageError)
         end
       end
@@ -59,7 +59,7 @@ describe CLI::UserCommand do
 
       it 'does not raise error' do
         opt_h.each do |key, value|
-          allow(mock_app).to receive(:run).with(:users, { key => value })
+          allow(mock_app).to receive(:run).with({ key => value })
           expect { cmd.run(["--#{key}=#{value}"]) }.not_to raise_error
         end
       end

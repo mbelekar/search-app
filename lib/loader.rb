@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Loader
-  class InvalidFilePathError < StandardError; end
-
   attr_reader :data, :data_for_type, :config, :parser
 
   def initialize(config, parser)
@@ -12,21 +10,22 @@ class Loader
     @config = config
   end
 
-  def call
-    config.each do |key, path|
-      raise InvalidFilePathError unless File.directory?(path)
+  # def call
+  #   config.each do |key, path|
+  #     raise InvalidFilePathError unless File.directory?(path)
 
-      load_files(key, path)
-    end
-  end
+  #     load_files(key, path)
+  #   end
+  #   @data
+  # end
 
-  private
-
-  def load_files(key, path)
+  def call(key, path)
     @data_for_type = []
     files_list(path).each { |filename| load(filename) }
     @data[key] = @data_for_type
   end
+
+  private
 
   def load(filename)
     @parser.parse_file(filename)

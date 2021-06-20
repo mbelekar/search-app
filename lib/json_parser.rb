@@ -2,7 +2,7 @@
 
 require 'oj'
 
-class Parser < Oj::ScHandler
+class JsonParser < Oj::ScHandler
   attr_reader :data
 
   def initialize
@@ -39,12 +39,6 @@ class Parser < Oj::ScHandler
     fh = File.open(filename, 'r')
     Oj.sc_parse(self, fh)
     fh.close
-    flatten_data
-  end
-
-  private
-
-  def flatten_data
     @data.flatten!
   end
 end

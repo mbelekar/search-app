@@ -18,15 +18,6 @@ describe Loader do
   end
 
   context 'when load' do
-    context 'with incorrect config' do
-      it 'raises error' do
-        allow(config).to receive(:each).and_yield('users', 'spec/support/users')\
-                                       .and_yield('tickets', 'spec/support/tickets')
-
-        expect { loader.call }.to raise_error(Loader::InvalidFilePathError)
-      end
-    end
-
     describe '#load' do
       it 'loads data for a single file in expected format' do
         allow(parser).to receive(:parse_file).with('foo')
@@ -36,7 +27,7 @@ describe Loader do
       end
     end
 
-    describe '#load_files' do
+    describe '#call' do
       context 'when :users' do
         let(:file_path) { 'spec/support/fixtures/users' }
         let(:kwargs) do

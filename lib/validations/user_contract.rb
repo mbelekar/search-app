@@ -10,10 +10,10 @@ module Validations
     config.validate_keys = true
 
     schema do
-      optional(:_id).value(Types::Strict::Integer)
-      optional(:name).value(Types::Strict::String)
-      optional(:created_at).value(Types::Strict::String)
-      optional(:verified).value(Types::Strict::Bool)
+      optional(:_id).value(Types::Strict::Integer | Types::Strict::Nil)
+      optional(:name).value(Types::Strict::String | Types::Strict::Nil)
+      optional(:created_at).value(Types::Strict::String | Types::Strict::Nil)
+      optional(:verified).value(Types::Strict::Bool | Types::Strict::Nil)
     end
 
     def validate(data)

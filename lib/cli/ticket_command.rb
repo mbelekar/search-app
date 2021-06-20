@@ -15,7 +15,7 @@ module CLI
 
     def execute
       signal_usage_error 'You must select atleast one option' unless any_option_selected?
-      Application.new.run(:tickets, options_h)
+      Application.new(:tickets).run(options_h)
     end
   end
 end

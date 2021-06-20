@@ -1,7 +1,7 @@
 [
   {
     "_id": 3,
-    "name": "baz",
+    "name": "",
     "created_at": "2016-04-15T05:19:46-10:00",
     "verified": false
   },
@@ -10,5 +10,17 @@
     "name": "qux",
     "created_at": "2016-06-23T10:31:39-10:00",
     "verified": false
+  },
+  {
+    "_id": null,
+    "name": "qux",
+    "created_at": "2016-06-23T10:31:39-10:00",
+    "verified": false
+  },
+  {
+    "_id": 6,
+    "name": "quux",
+    "created_at": "2016-06-23T10:31:39-10:00",
+    "verified": null
   }
 ]

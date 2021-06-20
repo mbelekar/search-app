@@ -21,8 +21,12 @@ module ModelSpecHelper
     }
   end
 
-  def model_data(data, model)
+  def hash_to_model(data, model)
     data.map { |d| model.new(d) }
+  end
+
+  def model_to_h(data)
+    data.map { |d| d.to_h }
   end
 
   class MockUser

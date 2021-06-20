@@ -13,7 +13,7 @@ describe CLI::TicketCommand do
   let(:mock_app) { instance_double(Application) }
 
   before do
-    allow(Application).to receive(:new).and_return(mock_app)
+    allow(Application).to receive(:new).with(:tickets).and_return(mock_app)
   end
 
   context 'when help' do
@@ -32,20 +32,20 @@ describe CLI::TicketCommand do
 
   context 'when called with options' do
     it 'returns true if options are selected' do
-      allow(mock_app).to receive(:run).with(:tickets, { _id: '1jhsj1', type: 'foo' })
+      allow(mock_app).to receive(:run).with({ _id: '1jhsj1', type: 'foo' })
       cmd.run(['--_id=1jhsj1', '--type=foo'])
       expect(cmd.any_option_selected?).to be true
     end
 
     it 'passes options to the method' do
-      allow(mock_app).to receive(:run).with(:tickets, { _id: 'eyt2hgsd', type: 'bar' })
+      allow(mock_app).to receive(:run).with({ _id: 'eyt2hgsd', type: 'bar' })
       cmd.run(['--_id=eyt2hgsd', '--type=bar'])
-      expect(mock_app).to have_received(:run).with(:tickets, { _id: 'eyt2hgsd', type: 'bar' }).once
+      expect(mock_app).to have_received(:run).with({ _id: 'eyt2hgsd', type: 'bar' }).once
     end
 
     context 'when incorrect type' do
       it 'raises error' do
-        allow(mock_app).to receive(:run).with(:tickets, { assignee_id: 'abc' })
+        allow(mock_app).to receive(:run).with({ assignee_id: 'abc' })
         expect { cmd.run(['--assignee_id=abc}']) }.to raise_error(Clamp::UsageError)
       end
     end
@@ -55,7 +55,7 @@ describe CLI::TicketCommand do
 
       it 'does not raise error' do
         opt_h.each do |key, value|
-          allow(mock_app).to receive(:run).with(:tickets, { key => value })
+          allow(mock_app).to receive(:run).with({ key => value })
           expect { cmd.run(["--#{key}=#{value}"]) }.not_to raise_error
         end
       end

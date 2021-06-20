@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require './lib/parser'
+require './lib/json_parser'
 require 'support/custom_matchers'
 
-describe Parser do
+describe JsonParser do
   subject(:parser) { described_class.new }
 
   describe '#hash_start' do

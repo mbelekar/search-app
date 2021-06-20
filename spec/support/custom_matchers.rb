@@ -36,7 +36,7 @@ RSpec::Matchers.define :load_files_for_type do |parser, file_path, **kwargs|
 
       allow(parser).to receive(:data).and_return(*kwargs[:stubbed_ret])
 
-      subject.send(:load_files, type, file_path)
+      subject.send(:call, type, file_path)
       expect(loader.data[type]).to eq(kwargs[:expected])
     rescue RSpec::Expectations::ExpectationNotMetError => e
       @error = e

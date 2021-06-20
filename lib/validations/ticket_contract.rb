@@ -10,12 +10,12 @@ module Validations
     config.validate_keys = true
 
     schema do
-      optional(:_id).value(Types::Strict::String)
-      optional(:created_at).value(Types::Strict::String)
-      optional(:type).value(Types::Strict::String)
-      optional(:subject).value(Types::Strict::String)
-      optional(:assignee_id).value(Types::Strict::Integer)
-      optional(:tags).value(Types::Strict::Array.of(Types::Strict::String))
+      optional(:_id).value(Types::Strict::String | Types::Strict::Nil)
+      optional(:created_at).value(Types::Strict::String | Types::Strict::Nil)
+      optional(:type).value(Types::Strict::String | Types::Strict::Nil)
+      optional(:subject).value(Types::Strict::String | Types::Strict::Nil)
+      optional(:assignee_id).value(Types::Strict::Integer | Types::Strict::Nil)
+      optional(:tags).value(Types::Strict::Array.of(Types::Strict::String.optional) | Types::Strict::Nil)
     end
 
     def validate(data)

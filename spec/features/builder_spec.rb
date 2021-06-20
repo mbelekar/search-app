@@ -14,7 +14,7 @@ describe Builder do
 
     let(:type) { 'users' }
     let(:data) { parsed_files_data_u }
-    let(:expected) { model_data(data, builder.model) }
+    let(:expected) { hash_to_model(data, builder.model) }
 
     it 'builds expected array of models' do
       actual = builder.call(data)
@@ -29,7 +29,7 @@ describe Builder do
     subject(:builder) { described_class.new('tickets') }
 
     let(:data) { parsed_files_data_t }
-    let(:expected) { model_data(data, builder.model) }
+    let(:expected) { hash_to_model(data, builder.model) }
 
     it 'builds expected array of models' do
       actual = builder.call(data)

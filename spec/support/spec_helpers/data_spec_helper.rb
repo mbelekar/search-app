@@ -23,7 +23,7 @@ module DataSpecHelper
     [
       {
         _id: 3,
-        name: 'baz',
+        name: '',
         created_at: '2016-04-15T05:19:46-10:00',
         verified: false
       },
@@ -32,6 +32,18 @@ module DataSpecHelper
         name: 'qux',
         created_at: '2016-06-23T10:31:39-10:00',
         verified: false
+      },
+      {
+        _id: nil,
+        name: 'qux',
+        created_at: '2016-06-23T10:31:39-10:00',
+        verified: false
+      },
+      {
+        _id: 6,
+        name: 'quux',
+        created_at: '2016-06-23T10:31:39-10:00',
+        verified: nil
       }
     ]
   end
@@ -44,11 +56,7 @@ module DataSpecHelper
         type: 'incident',
         subject: 'foo',
         assignee_id: 1,
-        tags: %w[
-          bar
-          baz
-          qux
-        ]
+        tags: %w[bar baz qux]
       },
       {
         _id: '34357-fh7gy77',
@@ -56,12 +64,7 @@ module DataSpecHelper
         type: 'foo',
         subject: 'bar',
         assignee_id: 2,
-        tags: %w[
-          bar
-          baz
-          qux
-          quux
-        ]
+        tags: %w[bar baz qux quux]
       }
     ]
   end
@@ -72,13 +75,9 @@ module DataSpecHelper
         _id: '38746dfg-tth-lk23',
         created_at: '2016-04-28T11:19:34-10:00',
         type: 'quux',
-        subject: 'quuz',
+        subject: '',
         assignee_id: 3,
-        tags: %w[
-          quux
-          quuz
-          qux
-        ]
+        tags: %w[quux quuz qux]
       },
       {
         _id: '294jgf-3wrii-45ng',
@@ -86,12 +85,15 @@ module DataSpecHelper
         type: 'waldo',
         subject: 'fred',
         assignee_id: 4,
-        tags: %w[
-          quux
-          quuz
-          qux
-          waldo
-        ]
+        tags: %w[quux quuz qux waldo]
+      },
+      {
+        _id: 'hgh98-6ggf7-iu',
+        created_at: '2016-04-14T08:32:31-10:00',
+        type: 'foo',
+        subject: 'test',
+        assignee_id: nil,
+        tags: []
       }
     ]
   end
