@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/filter_results'
 
 module Search
@@ -7,11 +9,10 @@ module Search
     attr_reader :tickets, :results
 
     def initialize(data)
-      @users = data["users"]
-      @tickets = data["tickets"]
+      @users = data['users']
+      @tickets = data['tickets']
       @results = []
     end
-
 
     def run(options)
       search_tickets(options)

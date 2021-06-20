@@ -5,15 +5,14 @@ require 'support/custom_matchers'
 require 'support/spec_helpers/model_spec_helper'
 require 'support/spec_helpers/data_spec_helper'
 require 'support/spec_helpers/search_spec_helper'
-
+# rubocop:disable RSpec/NamedSubject
 describe FilterResults do
   include ModelSpecHelper
   include DataSpecHelper
   include SearchSpecHelper
 
-  let(:dummy_class) { Class.new { include FilterResults } }
   let(:subject) { dummy_class.new }
-
+  let(:dummy_class) { Class.new { include FilterResults } }
   let(:usr) { hash_to_model(user_data, ModelSpecHelper::MockUser) }
   let(:tkt) { hash_to_model(ticket_data, ModelSpecHelper::MockTicket) }
 
@@ -155,3 +154,4 @@ describe FilterResults do
     end
   end
 end
+# rubocop:enable RSpec/NamedSubject

@@ -10,15 +10,6 @@ class Loader
     @config = config
   end
 
-  # def call
-  #   config.each do |key, path|
-  #     raise InvalidFilePathError unless File.directory?(path)
-
-  #     load_files(key, path)
-  #   end
-  #   @data
-  # end
-
   def call(key, path)
     @data_for_type = []
     files_list(path).each { |filename| load(filename) }

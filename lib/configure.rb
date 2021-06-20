@@ -1,5 +1,7 @@
-require './lib/factories/builder_factory'
-require './lib/factories/loader_factory'
+# frozen_string_literal: true
+
+require './lib//builder'
+require './lib/loader'
 require './lib/factories/parser_factory'
 
 class Configure
@@ -9,9 +11,9 @@ class Configure
   attr_reader :builder, :loader, :data
 
   def initialize
-    @file_type = config["type"].to_sym
-    @parser = Factories::ParserFactory.for(@file_type).new
-    @loader = Factories::LoaderFactory.for(@file_type).new(config, @parser)
+    file_type = config['type'].to_sym
+    @parser = Factories::ParserFactory.for(file_type).new
+    @loader = Loader.new(config, @parser)
     @data = {}
   end
 
@@ -36,7 +38,7 @@ class Configure
   end
 
   def build_data(raw_data, key)
-    @builder = Factories::BuilderFactory.for(@file_type).new(key)
+    @builder = Builder.new(key)
     @data[key] = @builder.call(raw_data)
   end
 end

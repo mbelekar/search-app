@@ -26,7 +26,7 @@ module ModelSpecHelper
   end
 
   def model_to_h(data)
-    data.map { |d| d.to_h }
+    data.map(&:to_h)
   end
 
   class MockUser

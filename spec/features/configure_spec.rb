@@ -22,8 +22,8 @@ describe Configure do
 
   describe '#run' do
     let(:parsed_data) { parsed_files_data }
-    let(:users) { hash_to_model(parsed_data["users"], Models::User) }
-    let(:tickets) { hash_to_model(parsed_data["tickets"], Models::Ticket) }
+    let(:users) { hash_to_model(parsed_data['users'], Models::User) }
+    let(:tickets) { hash_to_model(parsed_data['tickets'], Models::Ticket) }
     let(:expected) do
       {
         'users' => model_to_h(users),
@@ -31,12 +31,12 @@ describe Configure do
       }
     end
 
-    it 'parses all the files and loads data as expected' do
+    it 'configures all data as expected' do
       configure.config = config
       configure.run
       actual = configure.data
-      actual["users"] = model_to_h(actual["users"])
-      actual["tickets"] = model_to_h(actual["tickets"])
+      actual['users'] = model_to_h(actual['users'])
+      actual['tickets'] = model_to_h(actual['tickets'])
       expect(actual).to eq(expected)
     end
   end

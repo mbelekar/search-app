@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/search/ticket_search'
 require 'support/custom_matchers'
 require 'support/spec_helpers/model_spec_helper'
@@ -10,13 +12,14 @@ describe Search::TicketSearch do
   include SearchSpecHelper
 
   subject(:search) { described_class.new(data) }
+
   let(:data) do
-    {"users" => usr, "tickets" => tkt}
+    { 'users' => usr, 'tickets' => tkt }
   end
   let(:usr) { hash_to_model(user_data, ModelSpecHelper::MockUser) }
   let(:tkt) { hash_to_model(ticket_data, ModelSpecHelper::MockTicket) }
 
-    describe '#search_tickets' do
+  describe '#search_tickets' do
     let(:options) do
       {
         _id: '545-fhj-87hg8',
@@ -52,7 +55,7 @@ describe Search::TicketSearch do
 
     context 'when it finds matching tickets but empty users' do
       let(:usr) { hash_to_model(user_data_a, ModelSpecHelper::MockUser) }
-      let(:search) { described_class.new({"users" => usr, "tickets" => tkt}) }
+      let(:search) { described_class.new({ 'users' => usr, 'tickets' => tkt }) }
 
       it 'returns ticket with empty array for users' do
         expected.first[:tickets] = ModelSpecHelper::MockTicket.new(ticket_data.first).to_h
@@ -62,6 +65,8 @@ describe Search::TicketSearch do
     end
 
     context 'when one of the option is nil' do
+      subject(:search) { described_class.new({ 'users' => usr, 'tickets' => tkt }) }
+
       let(:options) do
         {
           assignee_id: nil,
@@ -70,7 +75,6 @@ describe Search::TicketSearch do
       end
       let(:tkt) { hash_to_model(ticket_data_a, ModelSpecHelper::MockTicket) }
       let(:usr) { hash_to_model(user_data_a, ModelSpecHelper::MockUser) }
-      subject(:search) { described_class.new({"users" => usr, "tickets" => tkt}) }
 
       it 'return correct data' do
         expected.first[:tickets] = ModelSpecHelper::MockTicket.new(ticket_data_a[2]).to_h

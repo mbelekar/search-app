@@ -129,5 +129,8 @@ RSpec/MultipleExpectations:
 Metrics/ModuleLength:
   Max: 110
 
+RSpec/FilePath:
+  Enabled: false
+
 AllCops:
     SuggestExtensions: false
