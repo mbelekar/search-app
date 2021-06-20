@@ -74,13 +74,12 @@ RSpec::Matchers.define :pass_file_to_parser do |klass, method, parser, file|
   end
 end
 
-RSpec::Matchers.define :find_users_w_related_tickets do |action, options, exp_type, exp_rel, func|
+RSpec::Matchers.define :find_data_w_related_entity do |action, options, expected, helper_func|
   match do |subject|
     begin
       subject.send(action, options)
-      actual_type, actual_related = func.call(subject.results)
-      expect(actual_type).to eq(exp_type)
-      expect(actual_related).to match_array(exp_rel)
+      actual = method(helper_func).call(subject.results)
+      expect(actual).to eq(expected)
     rescue RSpec::Expectations::ExpectationNotMetError => e
       @error = e
       raise

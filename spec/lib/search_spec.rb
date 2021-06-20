@@ -36,7 +36,7 @@ describe Search do
         it 'has true values for matched options and false values for unmatched options' do
           options[:name] = 'bar'
           actual = search.send(:select_criteria, usr.first, options)
-          expect(actual).to include(false)
+          expect(actual).to include(false, true)
         end
       end
 
@@ -53,7 +53,7 @@ describe Search do
         it 'has false values only' do
           options[:name] = 'bar'
           actual = search.send(:select_criteria, usr.first, options)
-          expect(actual).to include(false)
+          expect(actual).not_to include(true)
         end
       end
     end
@@ -78,7 +78,7 @@ describe Search do
         it 'has true values for matched options and false values for unmatched options' do
           options[:type] = 'bar'
           actual = search.send(:select_criteria, tkt.last, options)
-          expect(actual).to include(false)
+          expect(actual).to include(false, true)
         end
       end
 
@@ -96,7 +96,7 @@ describe Search do
 
         it 'has false values only' do
           actual = search.send(:select_criteria, tkt.first, options)
-          expect(actual).to include(false)
+          expect(actual).not_to include(true)
         end
       end
     end
@@ -123,8 +123,7 @@ describe Search do
         it 'does not select record' do
           options[:name] = 'baz'
           actual = search.send(:filter, usr, options).to_a.map(&:to_h)
-          expected = [ModelSpecHelper::MockUser.new(user_data.first).to_h]
-          expect(actual).not_to eq(expected)
+          expect(actual).to match_array([])
         end
       end
     end
@@ -133,7 +132,7 @@ describe Search do
       let(:options) do
         {
           _id: '34357-fh7gy77',
-          tags: %w[bar baz qux quux]
+          tags: %w[bar baz qux]
         }
       end
 
@@ -149,8 +148,7 @@ describe Search do
         it 'does not select record' do
           options[:tags] = %w[abc bar]
           actual = search.send(:filter, tkt, options).to_a.map(&:to_h)
-          expected = [ModelSpecHelper::MockTicket.new(ticket_data.last).to_h]
-          expect(actual).not_to eq(expected)
+          expect(actual).to match_array([])
         end
       end
     end
@@ -164,22 +162,32 @@ describe Search do
       }
     end
 
+    let(:expected) do
+      [
+        {
+          users: nil,
+          related: {
+            tickets: []
+          }
+        }
+      ]
+    end
+
     context 'when matched users and related tickets' do
       it 'returns correct results' do
-        expected_users = [ModelSpecHelper::MockUser.new(user_data.first).to_h]
-        expected_tickets = [ModelSpecHelper::MockTicket.new(ticket_data.first).to_h]
-        expect(search).to find_users_w_related_tickets(options, expected_users, expected_tickets,
-                                                       method(:process_user_results))
+        expected[0][:users] = ModelSpecHelper::MockUser.new(user_data.first).to_h
+        expected[0][:related][:tickets] = [ModelSpecHelper::MockTicket.new(ticket_data.first).to_h]
+        expect(search).to find_data_w_related_entity(:search_users, options, expected,
+                                                     :process_user_results)
       end
     end
 
     context 'when it doesnt find a match for users' do
       it 'returns empty array' do
         options[:_id] = 23
-        expected_users = []
-        expected_tickets = []
-        expect(search).to find_users_w_related_tickets(options, expected_users, expected_tickets,
-                                                       method(:process_user_results))
+        expected = []
+        expect(search).to find_data_w_related_entity(:search_users, options, expected,
+                                                     :process_user_results)
       end
     end
 
@@ -187,15 +195,58 @@ describe Search do
       let(:tkt) { model_data(ticket_data_a, ModelSpecHelper::MockTicket) }
       let(:search) { described_class.new(usr, tkt) }
 
-      it 'returns empty array for tickets' do
-        expected_users = [ModelSpecHelper::MockUser.new(user_data.first).to_h]
-        expected_tickets = []
-        expect(search).to find_users_w_related_tickets(options, expected_users, expected_tickets,
-                                                       method(:process_user_results))
+      it 'returns user with empty array for tickets' do
+        expected[0][:users] = ModelSpecHelper::MockUser.new(user_data.first).to_h
+        expected[0][:related][:tickets] = []
+        expect(search).to find_data_w_related_entity(:search_users, options, expected,
+                                                     :process_user_results)
       end
     end
   end
 
-  context 'when search tickets' do
+  describe '#search_tickets' do
+    let(:options) do
+      {
+        _id: '545-fhj-87hg8',
+        tags: %w[bar baz]
+      }
+    end
+    let(:expected) do
+      [
+        {
+          tickets: nil,
+          related: {
+            users: []
+          }
+        }
+      ]
+    end
+
+    context 'when matched tickets and related users' do
+      it 'returns correct results' do
+        expected[0][:tickets] = ModelSpecHelper::MockTicket.new(ticket_data.first).to_h
+        expected[0][:related][:users] = [ModelSpecHelper::MockUser.new(user_data.first).to_h]
+        expect(search).to find_data_w_related_entity(:search_tickets, options, expected, :process_ticket_results)
+      end
+    end
+
+    context 'when it doesnt find a match for tickets' do
+      it 'returns empty array' do
+        options[:_id] = '23'
+        expected = []
+        expect(search).to find_data_w_related_entity(:search_tickets, options, expected, :process_ticket_results)
+      end
+    end
+
+    context 'when it finds matching tickets but empty users' do
+      let(:usr) { model_data(user_data_a, ModelSpecHelper::MockUser) }
+      let(:search) { described_class.new(usr, tkt) }
+
+      it 'returns ticket with empty array for users' do
+        expected[0][:tickets] = ModelSpecHelper::MockTicket.new(ticket_data.first).to_h
+        expected[0][:related][:users] = []
+        expect(search).to find_data_w_related_entity(:search_tickets, options, expected, :process_ticket_results)
+      end
+    end
   end
 end

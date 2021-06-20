@@ -16,16 +16,6 @@ class Search
     end
   end
 
-  def search_users(options)
-    usr = filter(@users, options)
-    usr.each do |u|
-      @results.push(users_results(u))
-    end
-    @results
-  end
-
-  def search_tickets(options); end
-
   private
 
   def select_criteria(record, options)
@@ -53,11 +43,36 @@ class Search
     arr.lazy.select { |a| a unless select_criteria(a, options).any?(false) }
   end
 
+  def search_users(options)
+    usr = filter(@users, options)
+    usr.each do |u|
+      @results.push(users_results(u))
+    end
+    @results
+  end
+
+  def search_tickets(options)
+    tkt = filter(@tickets, options)
+    tkt.each do |t|
+      @results.push(tickets_results(t))
+    end
+    @results
+  end
+
   def users_results(u)
     {
       users: u,
       related: {
         tickets: filter(@tickets, { assignee_id: u._id })
+      }
+    }
+  end
+
+  def tickets_results(t)
+    {
+      tickets: t,
+      related: {
+        users: filter(@users, { _id: t.assignee_id })
       }
     }
   end
