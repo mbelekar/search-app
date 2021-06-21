@@ -1,39 +1,29 @@
 # frozen_string_literal: true
 
 require 'yaml'
-require './lib/cli/main_command'
-require './lib/parser'
+require './lib/configure'
+require './lib/factories/search_factory'
 
 class Application
-  # rubocop:disable Lint/DuplicateMethods
-  attr_reader :tickets, :users, :config, :parser, :data
+  attr_accessor :config
+  attr_reader :search_class, :configure
 
-  def initialize
-    @parser = Parser.new
+  def initialize(type, config=nil)
+    @configure = Configure.new(config)
+    @search_class = Factories::SearchFactory.for(type)
   end
 
-  def run(_type, *_kwargs)
-    config.each do |key, path|
-      parse_files(path)
-      instance_variable_set("@#{key}", @data)
-    end
+  def run(kwargs)
+    data = @configure.run
+    search = @search_class.new(data)
+    results = search.run(kwargs)
+    results
   end
 
   private
 
-  def parse_files(path)
-    @data = []
-    files = Dir.glob("#{path}/*")
-
-    files.each do |filename|
-      File.open(filename, 'r') do |fh|
-        @data.push(*@parser.parse_file(fh))
-      end
-    end
-  end
-
   def config
-    @config ||= YAML.safe_load(File.read('./config/files.yml'))['path']
+    @config ||= YAML.safe_load(File.read('./config/files.yml'))
   end
-  # rubocop:enable Lint/DuplicateMethods
+
 end

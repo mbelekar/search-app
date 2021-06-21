@@ -8,7 +8,7 @@ describe Configure do
   include DataSpecHelper
   include ModelSpecHelper
 
-  subject(:configure) { described_class.new }
+  subject(:configure) { described_class.new(config) }
 
   let(:config) do
     {
@@ -32,7 +32,6 @@ describe Configure do
     end
 
     it 'configures all data as expected' do
-      configure.config = config
       configure.run
       actual = configure.data
       actual['users'] = model_to_h(actual['users'])

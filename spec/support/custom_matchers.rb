@@ -93,3 +93,27 @@ RSpec::Matchers.define :find_data_w_related_entity do |action, options, expected
     MESSAGE
   end
 end
+
+RSpec::Matchers.define :run_invokes_configure_and_search_methods do |application, data, search, options|
+  match do |subject|
+    begin
+      allow(application.configure).to receive(:run).and_return(data)
+      allow(application.search_class).to receive(:new).with(data).and_return(search)
+      allow(search).to receive(:run).with(options)
+      application.run(options)
+      expect(application.configure).to have_received(:run).once
+      expect(application.search_class).to have_received(:new).with(data).once
+      expect(search).to have_received(:run).with(options).once
+    rescue RSpec::Expectations::ExpectationNotMetError => e
+      @error = e
+      raise
+    end
+  end
+
+  failure_message do |_subject|
+    <<~MESSAGE
+      expected to call #configure.run and #search.run but failed with error:
+      #{@error}
+    MESSAGE
+  end
+end

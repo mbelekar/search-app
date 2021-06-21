@@ -8,10 +8,11 @@ class Configure
   class InvalidFilePathError < StandardError; end
 
   attr_accessor :config
-  attr_reader :builder, :loader, :data
+  attr_reader :builder, :loader, :data, :config
 
-  def initialize
-    file_type = config['type'].to_sym
+  def initialize(config)
+    @config = config
+    file_type = @config['type'].to_sym
     @parser = Factories::ParserFactory.for(file_type).new
     @loader = Loader.new(config, @parser)
     @data = {}
@@ -26,11 +27,6 @@ class Configure
   end
 
   private
-
-  def config
-    @config ||= YAML.safe_load(File.read('./config/files.yml'))
-  end
-
   def load_data(key, path)
     raise InvalidFilePathError unless File.directory?(path)
 
