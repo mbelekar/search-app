@@ -20,6 +20,10 @@ describe Application do
     }
   end
 
+  before do
+    allow($stdout).to receive(:write)
+  end
+
   context 'with default config' do
     let(:default_config) do
       {

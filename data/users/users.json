@@ -446,17 +446,5 @@
     "name": "Catalina Simpson",
     "created_at": "2016-06-07T09:18:00-10:00",
     "verified": true
-  },
-  {
-    "_id" : 74,
-    "name" : "Melissa Bishop",
-    "created_at" : "2016-02-17T10:35:02-11:00",
-    "verified" : false
-  },
-  {
-    "_id" : 75,
-    "name" : "Catalina Simpson",
-    "created_at" : "2016-06-07T09:18:00-10:00",
-    "verified" : true
   }
 ]

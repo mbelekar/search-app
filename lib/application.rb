@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
+require 'json'
 require './lib/data_builder'
 require './lib/factories/search_factory'
+require './lib/cli/data_display'
 
 class Application
   class InvalidSearchTypeError < StandardError; end
 
   class InvalidSearchOptionError < StandardError; end
+
+  include CLI::DataDisplay
 
   attr_reader :builder, :type
   attr_accessor :search_class
@@ -29,8 +33,9 @@ class Application
 
     data = @builder.run
     search = @search_class.new(data)
-    search.run(kwargs)
-    # require 'pry'; binding.pry
+    results = search.run(kwargs)
+    data_display(@type, results)
+    results
   end
 
   private
