@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require './lib/json_parser'
-require 'support/custom_matchers'
+require 'support/custom_matchers/parser_matcher'
 
 describe JsonParser do
   subject(:parser) { described_class.new }
@@ -16,7 +16,7 @@ describe JsonParser do
     let(:fh) { double }
 
     it 'calls #Oj.sc_parse with correct args' do
-      expect(parser).to pass_file_to_parser(Oj, :sc_parse, parser, 'foo')
+      expect(parser).to invoke_sc_parse(Oj, :sc_parse, parser, 'foo')
     end
   end
 
@@ -49,6 +49,11 @@ describe JsonParser do
     it 'prints correct message to stdout' do
       out = "ERROR: Invalid at line 2, column 3\n"
       expect { parser.error('Invalid', 2, 3) }.to output(out).to_stdout
+    end
+
+    it 'raises error with invalid json' do
+      file = 'spec/support/fixtures/error_files/users.json'
+      expect { parser.parse_file(file) }.to raise_error(Oj::ParseError)
     end
   end
 end

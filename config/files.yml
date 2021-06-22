@@ -1,4 +1,0 @@
-type: 'json'
-path:
-  users: './data/users/'
-  tickets: './data/tickets/'

@@ -132,5 +132,8 @@ Metrics/ModuleLength:
 RSpec/FilePath:
   Enabled: false
 
+RSpec/MultipleMemoizedHelpers:
+  Max: 8
+
 AllCops:
     SuggestExtensions: false

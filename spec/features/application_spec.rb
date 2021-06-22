@@ -9,6 +9,7 @@ describe Application do
   include DataSpecHelper
   include ModelSpecHelper
   include SearchSpecHelper
+
   let(:config) do
     {
       'type' => 'json',
@@ -17,6 +18,43 @@ describe Application do
         'tickets' => 'spec/support/fixtures/tickets'
       }
     }
+  end
+
+  context 'with default config' do
+    let(:default_config) do
+      {
+        'type' => 'json',
+        'path' => {
+          'users' => './data/users/',
+          'tickets' => './data/tickets/'
+        }
+      }
+    end
+
+    it 'loads default config when no config argument is passed' do
+      app = described_class.new(:users)
+      expect(app.builder.config).to eq(default_config)
+    end
+  end
+
+  context 'when invalid options' do
+    subject(:application) { described_class.new(type, config) }
+
+    let(:options) { {} }
+    let(:type) { :users }
+
+    it 'raises error' do
+      expect { application.run(options) }.to raise_error(Application::InvalidSearchOptionError)
+    end
+  end
+
+  context 'when invalid type' do
+    let(:options) { { _id: 1 } }
+    let(:type) { :foo }
+
+    it 'raises error' do
+      expect { described_class.new(type, config) }.to raise_error(Application::InvalidSearchTypeError)
+    end
   end
 
   describe '#run' do
@@ -30,14 +68,12 @@ describe Application do
         }
       end
       let(:parsed_data) { parsed_files_data }
-      let(:users) { hash_to_model(user_data, Models::User) }
-      let(:tickets) { hash_to_model(ticket_data, Models::Ticket) }
       let(:expected) do
         [
           {
-            users: model_to_h(users).first,
+            users: user_data.first.transform_keys(&:to_s),
             related: {
-              tickets: [model_to_h(tickets).first]
+              tickets: [ticket_data.first.transform_keys(&:to_s)]
             }
           }
         ]
@@ -60,14 +96,12 @@ describe Application do
         }
       end
       let(:parsed_data) { parsed_files_data }
-      let(:users) { hash_to_model(user_data, Models::User) }
-      let(:tickets) { hash_to_model(ticket_data, Models::Ticket) }
       let(:expected) do
         [
           {
-            tickets: model_to_h(tickets).last,
+            tickets: ticket_data.last.transform_keys(&:to_s),
             related: {
-              users: [model_to_h(users).last]
+              users: [user_data.last.transform_keys(&:to_s)]
             }
           }
         ]

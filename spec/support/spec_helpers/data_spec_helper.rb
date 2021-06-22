@@ -99,11 +99,11 @@ module DataSpecHelper
   end
 
   def parsed_files_data_u
-    user_data.concat(user_data_a)
+    user_data_a.concat(user_data)
   end
 
   def parsed_files_data_t
-    ticket_data.concat(ticket_data_a)
+    ticket_data_a.concat(ticket_data)
   end
 
   def parsed_files_data

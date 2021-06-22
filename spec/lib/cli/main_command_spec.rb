@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'support/custom_matchers'
+require 'support/custom_matchers/subcommand_matcher'
 require './lib/cli/main_command'
 
 describe CLI::MainCommand do

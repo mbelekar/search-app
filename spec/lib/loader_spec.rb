@@ -1,60 +1,47 @@
 # frozen_string_literal: true
 
 require './lib/loader'
-require 'support/custom_matchers'
-require 'support/spec_helpers/data_spec_helper'
+require 'support/custom_matchers/loader_matcher'
 
 describe Loader do
-  include DataSpecHelper
+  context 'when load json files' do
+    subject(:loader) { described_class.new(config, parser) }
 
-  subject(:loader) { described_class.new(config, parser) }
+    let(:parser) { instance_double('JsonParser') }
 
-  let(:parser) { instance_double('Parser') }
-  let(:config) do
-    {
-      'users' => 'spec/support/fixtures/users',
-      'tickets' => 'spec/support/fixtures/tickets'
-    }
-  end
+    let(:config) do
+      {
+        'type' => 'json',
+        'path' => {
+          'users' => 'spec/support/fixtures/users',
+          'tickets' => 'spec/support/fixtures/tickets'
+        }
+      }
+    end
 
-  context 'when load' do
-    describe '#load' do
-      it 'loads data for a single file in expected format' do
-        allow(parser).to receive(:parse_file).with('foo')
-        allow(parser).to receive(:data).and_return(user_data)
-        loader.send(:load, 'foo')
-        expect(loader.data_for_type).to eq(user_data)
+    before do
+      allow(JsonParser).to receive(:new).and_return(parser)
+      files.each do |file|
+        allow(parser).to receive(:parse_file).with(file).and_return([])
       end
     end
 
     describe '#call' do
+      let(:files) { Dir.glob("#{file_path}/*") }
+
       context 'when :users' do
         let(:file_path) { 'spec/support/fixtures/users' }
-        let(:kwargs) do
-          {
-            type: 'users',
-            expected: parsed_files_data_u,
-            stubbed_ret: [user_data, user_data_a]
-          }
-        end
 
-        it 'loads users data from multiple files in expected format' do
-          expect(loader).to load_files_for_type(parser, file_path, kwargs)
+        it 'invokes json parser for multiple files' do
+          expect(loader).to invoke_parser_for_each_file(parser, file_path, 'users')
         end
       end
 
       context 'when :tickets' do
         let(:file_path) { 'spec/support/fixtures/tickets' }
-        let(:kwargs) do
-          {
-            type: 'tickets',
-            expected: parsed_files_data_t,
-            stubbed_ret: [ticket_data, ticket_data_a]
-          }
-        end
 
-        it 'loads tickets data from multiple files in expected format' do
-          expect(loader).to load_files_for_type(parser, file_path, kwargs)
+        it 'invokes json parser for tickets data from multiple files' do
+          expect(loader).to invoke_parser_for_each_file(parser, file_path, 'tickets')
         end
       end
     end

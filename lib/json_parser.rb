@@ -39,6 +39,8 @@ class JsonParser < Oj::ScHandler
     fh = File.open(filename, 'r')
     Oj.sc_parse(self, fh)
     fh.close
-    @data.flatten!
+    @data
+  rescue StandardError => e
+    raise e
   end
 end

@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'clamp', '~> 1.3'
 gem 'dry-types', '~> 1.5'
 gem 'dry-validation', '~> 1.6'
+gem 'json-schema', '~> 2.8'
 gem 'oj', '~> 3.11'
 gem 'rake', '~> 13.0'
 

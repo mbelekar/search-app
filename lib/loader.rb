@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+require './lib/factories/parser_factory'
+
 class Loader
+  class InvalidArgError < StandardError; end
+
   attr_reader :data, :data_for_type, :config, :parser
 
   def initialize(config, parser)
@@ -19,8 +23,8 @@ class Loader
   private
 
   def load(filename)
-    @parser.parse_file(filename)
-    @data_for_type.push(*parser.data)
+    data = @parser.parse_file(filename)
+    @data_for_type.push(*data.flatten!)
   end
 
   def files_list(path)
