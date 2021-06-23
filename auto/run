@@ -2,6 +2,4 @@
 
 cd "$(dirname "$0")"/..
 
-docker build -q -t search-app . > /dev/null
-
 docker run -it --rm search-app "${@:-bash}"
