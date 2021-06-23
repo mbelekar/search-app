@@ -1,0 +1,7 @@
+#!/bin/bash -eu
+
+cd "$(dirname "$0")"/..
+
+docker build -f support/Dockerfile.dev -q -t search-app-dev . > /dev/null
+
+docker run -it --rm search-app-dev "${@:-bash}"

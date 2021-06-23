@@ -1,0 +1,3 @@
+#!/bin/bash -eu
+
+auto/dev-environment bundle exec rspec -fd
