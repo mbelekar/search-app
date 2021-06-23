@@ -28,11 +28,26 @@ Running above script will build local docker images for development and producti
 Tests have been written using rspec.
 
 #### To run all the tests:
+
+Run build script prior to running tests:
+
+```
+$ ./auto/build
+```
+
+Run tests:
+
 ```
 $ ./auto/test
 ```
 
 #### Run Application:
+
+Run build script before running application: 
+
+```
+$ ./auto/build
+```
 
 To search for users:
 
