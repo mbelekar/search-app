@@ -61,7 +61,7 @@ But `bundle exec ./bin/search users --_id=1 --_id=2` will return records for _id
 
 #### Alternate way of running application without Docker
 
-In case you do not wish to use docker you can run this application if you have ruby-3.0 installed on your machine. In the application root directory run the following commands in the terminal:
+In case you do not wish to use docker you can run this application with ruby-3.0 installed on your machine. In the application root directory run the following commands in the terminal:
 
 ```
 $ bundle install
@@ -106,7 +106,7 @@ To keep it simple and meet all the requirements, I have made following assumptio
 - `UserCommand` represents the `users` subcommand.
 - `TicketCommand` represents `tickets` subcommand.
 Both the subcommand classes enforce type validation on the end user's cli input. These classes pass users inputs to the `Application` class to invoke data load/transform and search
-### Application
+#### Application
 - `Application` ties together cli, search and data load/transform functionality. It passes data config to `DataBuilder`. Once it gets back loaded/transformed data, it passes this along with the user selected search options from `CLI::UserCommand`/ `CLI::TicketCommand` class to the correct search class(returned by `SearchFactory`). The search results are then displayed using `DataDisplay` module (mixed-in with `Application`)
 
 The design of this application has turned out to be flexible and follows principles of loose coupling and single responsibility. Where applicable, modules have been used. Objects and config are injected as dependencies.
