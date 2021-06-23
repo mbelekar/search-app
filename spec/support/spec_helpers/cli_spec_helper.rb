@@ -54,7 +54,7 @@ module CliSpecHelper
         --type            Ticket Type
         --subject         Ticket Subject
         --assignee_id     Ticket Assignee Id (Should be a number)
-        --tags            Ticket Tags
+        --tags            Ticket Tags (Can be specified multiple times)
         -h, --help        print help
     DOC
   end
