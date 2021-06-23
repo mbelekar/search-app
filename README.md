@@ -43,7 +43,7 @@ $ ./auto/test
 
 #### Run Application:
 
-Run build script before running application: 
+Run build script before running application:
 
 ```
 $ ./auto/build
@@ -124,8 +124,6 @@ Both the subcommand classes enforce type validation on the end user's cli input.
 #### Application
 - `Application` ties together cli, search and data load/transform functionality. It passes data config to `DataBuilder`. Once it gets back loaded/transformed data, it passes this along with the user selected search options from `CLI::UserCommand`/ `CLI::TicketCommand` class to the correct search class(returned by `SearchFactory`). The search results are then displayed using `DataDisplay` module (mixed-in with `Application`)
 
-The design of this application has turned out to be flexible and follows principles of loose coupling and single responsibility. Where applicable, modules have been used. Objects and config are injected as dependencies.
-
 Application flow:![search-app](https://user-images.githubusercontent.com/1658005/123136945-d47bd400-d496-11eb-98c6-10752fb2030d.png)
 
 #### Tests:
@@ -133,7 +131,7 @@ Application flow:![search-app](https://user-images.githubusercontent.com/1658005
 - Fixtures, helper test classes and custom matchers are used to keep the code DRY
 
 ### Trade-offs
-- Some coupling with classes that are seemded to be safe. Eg: `DataBuilder` is coupled with `Loader` as the the latter is meant to just glob files from directory and send to `Parser`. This responsibility is less likely to change if the source data always going to be in file format
+- Some coupling with classes that are deemed to be safe. Eg: `DataBuilder` is coupled with `Loader` as the the latter is meant to just glob files from directory and send to `Parser`. This responsibility is less likely to change if the source data always going to be in file format
 
 ### Improvements
 - The data is loaded every time a search command is run. Design can be changed to load once and search multiple times.
