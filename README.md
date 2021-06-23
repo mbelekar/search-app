@@ -100,7 +100,7 @@ To keep it simple and meet all the requirements, I have made following assumptio
 - All source data can fit into memory for searching
 
 ### Technical Design choices:
-##### Domain model:
+#### Domain model:
 - `Models::User` models a single user record from the data file
 - `Models::Ticket` models a single ticket record from the data file
 #### Validation:
@@ -125,6 +125,9 @@ Both the subcommand classes enforce type validation on the end user's cli input.
 - `Application` ties together cli, search and data load/transform functionality. It passes data config to `DataBuilder`. Once it gets back loaded/transformed data, it passes this along with the user selected search options from `CLI::UserCommand`/ `CLI::TicketCommand` class to the correct search class(returned by `SearchFactory`). The search results are then displayed using `DataDisplay` module (mixed-in with `Application`)
 
 The design of this application has turned out to be flexible and follows principles of loose coupling and single responsibility. Where applicable, modules have been used. Objects and config are injected as dependencies.
+
+Application flow:![search-app](https://user-images.githubusercontent.com/1658005/123136945-d47bd400-d496-11eb-98c6-10752fb2030d.png)
+
 #### Tests:
 - Unit tests and feature tests cover the functionality.
 - Fixtures, helper test classes and custom matchers are used to keep the code DRY
