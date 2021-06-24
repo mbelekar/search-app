@@ -6,7 +6,7 @@ module Search
   class TicketSearch
     include FilterResults
 
-    attr_reader :tickets, :results
+    attr_reader :tickets, :users, :results
 
     def initialize(data)
       @users = data['users']

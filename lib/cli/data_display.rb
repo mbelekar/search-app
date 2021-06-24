@@ -11,7 +11,7 @@ module CLI
       msg = "Searching for #{type.capitalize} .."
       puts msg.cyan
       process_results(type, data)
-    rescue NoResultsError => e
+    rescue NoResultsError
       display_message
     end
 

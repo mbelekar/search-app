@@ -5,6 +5,8 @@ require 'support/spec_helpers/data_spec_helper'
 require 'support/spec_helpers/model_spec_helper'
 require 'support/spec_helpers/search_spec_helper'
 
+# rubocop:disable RSpec/InstanceVariable
+# rubocop:disable Layout/LineLength
 describe CLI::DataDisplay do
   include described_class
   include DataSpecHelper
@@ -101,3 +103,5 @@ describe CLI::DataDisplay do
     end
   end
 end
+# rubocop:enable RSpec/InstanceVariable
+# rubocop:enable Layout/LineLength

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module FilterResults
-  attr_reader :users, :tickets, :results
+  attr_reader :results
 
   private
 
