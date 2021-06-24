@@ -44,7 +44,7 @@ To search for users:
 $ ./auto/run search users [OPTIONS]
 ```
 
-To see a list of available options, you can run `./auto/run search users` or `./auto/run search users --help` or `./auto/run search users -h`.
+To see a list of available options, you can run `./auto/run search users --help` or `./auto/run search users -h`.
 
 [OPTIONS] represent the fields from data files which can be searched on. It can be a single option or multiple options of the format `--key=value`. You will need to specify at least one option to be able to search.
 
@@ -54,7 +54,7 @@ To search for tickets
 $ ./auto/run search tickets [OPTIONS]
 ```
 
-To see a list of available options, you can run `./auto/run search tickets` or `./auto/run search tickets --help` or `./auto/run search tickets -h`.
+To see a list of available options, you can run `./auto/run search tickets --help` or `./auto/run search tickets -h`.
 
 [OPTIONS] represent the fields from data files which can be searched on. It can be a single option or multiple options of the format `--key=value`. You will need to specify at least one option to be able to search.
 
