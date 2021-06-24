@@ -120,7 +120,8 @@ Both the subcommand classes enforce type validation on the end user's cli input.
 #### Application
 - `Application` ties together cli, search and data load/transform functionality. It passes data config to `DataBuilder`. Once it gets back loaded/transformed data, it passes this along with the user selected search options from `CLI::UserCommand`/ `CLI::TicketCommand` class to the correct search class(returned by `SearchFactory`). The search results are then displayed using `DataDisplay` module (mixed-in with `Application`)
 
-Application flow:![search-app](https://user-images.githubusercontent.com/1658005/123136945-d47bd400-d496-11eb-98c6-10752fb2030d.png)
+Application flow:![search-app](https://user-images.githubusercontent.com/1658005/123196575-83e39580-d4ed-11eb-9912-867b913f5dbe.png)
+
 
 #### Tests:
 - Unit tests and feature tests cover the functionality.
