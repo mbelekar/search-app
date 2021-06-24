@@ -95,7 +95,7 @@ describe CLI::DataDisplay do
 
     context 'when no results' do
       it 'displays human readable error message' do
-        expected = "\e[0;36;49mSearching for Tickets ..\e[0m\n\n\e[0;31;49mNo results found. Try using different search options ...\e[0m\n"
+        expected = "\e[0;36;49mSearching for Tickets ..\e[0m\n\n\e[0;31;49mNo results found. Try using different search terms ...\e[0m\n"
         expect { data_display(:tickets, []) }.to output(expected).to_stdout
       end
     end

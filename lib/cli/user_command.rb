@@ -9,7 +9,7 @@ module CLI
     end
     option '--name', '', 'User Name'
     option '--created_at', '', 'User Creation Timestamp'
-    option '--verified', '', 'User Verified (Should be eiher true or false)' do |s|
+    option '--verified', '', 'User Verified (Should be either true or false)' do |s|
       to_bool(s) unless s.nil?
     end
 

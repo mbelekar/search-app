@@ -29,6 +29,26 @@ module CliSpecHelper
     }
   end
 
+  def nil_opt_h_ticket
+    {
+      _id: nil,
+      created_at: nil,
+      type: nil,
+      subject: nil,
+      assignee_id: nil,
+      tags: nil
+    }
+  end
+
+  def nil_opt_h_user
+    {
+      _id: nil,
+      name: nil,
+      created_at: nil,
+      verified: nil
+    }
+  end
+
   def users_help_output
     <<~DOC
     Usage:
@@ -38,7 +58,7 @@ module CliSpecHelper
         --_id            User Id (Should be a number)
         --name           User Name
         --created_at     User Creation Timestamp
-        --verified       User Verified (Should be eiher true or false)
+        --verified       User Verified (Should be either true or false)
         -h, --help       print help
     DOC
   end

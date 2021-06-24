@@ -44,9 +44,20 @@ describe CLI::TicketCommand do
     end
 
     context 'when incorrect type' do
-      it 'raises error' do
+      it 'raises error for incorrect value' do
         allow(mock_app).to receive(:run).with({ assignee_id: 'abc' })
         expect { cmd.run(['--assignee_id=abc}']) }.to raise_error(Clamp::UsageError)
+      end
+    end
+
+    context 'when nil type' do
+      let(:opt_h) { nil_opt_h_ticket }
+
+      it 'does not raise error' do
+        opt_h.each do |key, value|
+          allow(mock_app).to receive(:run).with({ key => value })
+          expect { cmd.run(["--#{key}"]) }.not_to raise_error
+        end
       end
     end
 

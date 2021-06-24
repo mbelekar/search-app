@@ -79,7 +79,7 @@ module CLI
 
     def display_message
       puts "\n"
-      puts 'No results found. Try using different search options ...'.red
+      puts 'No results found. Try using different search terms ...'.red
     end
   end
 end

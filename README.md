@@ -5,6 +5,7 @@ This application is a simple command line app that searches data and prints it t
 - Search can be performed on any field
 - Search can be performed for missing values
 - Search will look for exact terms in the provided data.
+- When no results are found, it will display a human readable message asking the user to alter search criteria.
 
 ### Set up
 
@@ -44,7 +45,8 @@ To search for users:
 $ ./auto/run search users [OPTIONS]
 ```
 
-To see a list of available options, you can run `./auto/run search users --help` or `./auto/run search users -h`.
+#### Help options:
+To see a list of available options for users search, you can run `./auto/run search users --help` or `./auto/run search users -h`.
 
 [OPTIONS] represent the fields from data files which can be searched on. It can be a single option or multiple options of the format `--key=value`. You will need to specify at least one option to be able to search.
 
@@ -54,10 +56,17 @@ To search for tickets
 $ ./auto/run search tickets [OPTIONS]
 ```
 
-To see a list of available options, you can run `./auto/run search tickets --help` or `./auto/run search tickets -h`.
+To see a list of available options for tickets search, you can run `./auto/run search tickets --help` or `./auto/run search tickets -h`.
 
 [OPTIONS] represent the fields from data files which can be searched on. It can be a single option or multiple options of the format `--key=value`. You will need to specify at least one option to be able to search.
 
+#### Search for missing values:
+
+To search for missing values, simply specify an option without any value, ie. no spaces or empty strings
+
+```
+$ ./auto/run search tickets --assignee_id
+```
 
 #### Multi-valued Options
 When help information for an option says `(Supports searching multiple values at once)` it means we can search for multiple terms using that particular option. By default an option can be specified only once for the sub-command unless the help message says otherwise.

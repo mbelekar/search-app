@@ -9,7 +9,7 @@ module CLI
     option '--type', '', 'Ticket Type'
     option '--subject', '', 'Ticket Subject'
     option '--assignee_id', '', 'Ticket Assignee Id (Should be a number)' do |s|
-      Integer(s)
+      Integer(s) unless s.nil?
     end
     option '--tags', '', 'Ticket Tags (Supports searching multiple values at once)', multivalued: true
 

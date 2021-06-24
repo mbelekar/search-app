@@ -54,6 +54,17 @@ describe CLI::UserCommand do
       end
     end
 
+    context 'when nil type' do
+      let(:opt_h) { nil_opt_h_user }
+
+      it 'does not raise error' do
+        opt_h.each do |key, value|
+          allow(mock_app).to receive(:run).with({ key => value })
+          expect { cmd.run(["--#{key}"]) }.not_to raise_error
+        end
+      end
+    end
+
     context 'with correct type' do
       let(:opt_h) { opt_h_user }
 
