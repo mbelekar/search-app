@@ -11,7 +11,7 @@ module CLI
     option '--assignee_id', '', 'Ticket Assignee Id (Should be a number)' do |s|
       Integer(s)
     end
-    option '--tags', '', 'Ticket Tags (Can be specified multiple times)', multivalued: true
+    option '--tags', '', 'Ticket Tags (Supports searching multiple values at once)', multivalued: true
 
     def execute
       signal_usage_error 'You must select atleast one option' unless any_option_selected?
