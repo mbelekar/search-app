@@ -72,9 +72,9 @@ $ ./auto/run search tickets --assignee_id
 When help information for an option says `(Supports searching multiple values at once)` it means we can search for multiple terms using that particular option. By default an option can be specified only once for the sub-command unless the help message says otherwise.
 
 Example:
-`bundle exec ./bin/search tickets --tags="Fédératéd Statés Of Micronésia"  --tags="Wisconsin"` will search for tickets that have both tags "Fédératéd Statés Of Micronésia" and "Wisconsin"
+`auto/run search tickets --tags="Fédératéd Statés Of Micronésia"  --tags="Wisconsin"` will search for tickets that have both tags "Fédératéd Statés Of Micronésia" and "Wisconsin"
 
-But `bundle exec ./bin/search users --_id=1 --_id=2` will return records for _id=2 since this option is not meant to be multi-valued.
+But `auto/run search users --_id=1 --_id=2` will return records for _id=2 since this option is not meant to be multi-valued.
 
 #### Alternate way of running application without Docker:
 
