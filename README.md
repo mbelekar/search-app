@@ -39,26 +39,25 @@ Run build script before running application:
 $ ./auto/build
 ```
 
-To search for users:
+#### Search for users:
 
 ```
 $ ./auto/run search users [OPTIONS]
 ```
 
-#### Help options:
-To see a list of available options for users search, you can run `./auto/run search users --help` or `./auto/run search users -h`.
-
-[OPTIONS] represent the fields from data files which can be searched on. It can be a single option or multiple options of the format `--key=value`. You will need to specify at least one option to be able to search.
-
-To search for tickets
+#### Search for tickets:
 
 ```
 $ ./auto/run search tickets [OPTIONS]
 ```
 
-To see a list of available options for tickets search, you can run `./auto/run search tickets --help` or `./auto/run search tickets -h`.
+#### Help options:
+
+To see a list of available options for users search, you can run `./auto/run search users --help` or `./auto/run search users -h`.
 
 [OPTIONS] represent the fields from data files which can be searched on. It can be a single option or multiple options of the format `--key=value`. You will need to specify at least one option to be able to search.
+
+Similarly, to see a list of available options for tickets search, you can run `./auto/run search tickets --help` or `./auto/run search tickets -h`.
 
 #### Search for missing values:
 
@@ -68,7 +67,8 @@ To search for missing values, simply specify an option without any value, ie. no
 $ ./auto/run search tickets --assignee_id
 ```
 
-#### Multi-valued Options
+#### Multi-valued Options:
+
 When help information for an option says `(Supports searching multiple values at once)` it means we can search for multiple terms using that particular option. By default an option can be specified only once for the sub-command unless the help message says otherwise.
 
 Example:
@@ -76,7 +76,7 @@ Example:
 
 But `bundle exec ./bin/search users --_id=1 --_id=2` will return records for _id=2 since this option is not meant to be multi-valued.
 
-#### Alternate way of running application without Docker
+#### Alternate way of running application without Docker:
 
 In case you do not wish to use docker you can run this application with ruby-3.0 installed on your machine. In the application root directory run the following commands in the terminal:
 
@@ -94,7 +94,7 @@ $ bundle install
 $ bundle exec rspec -fd
 ```
 
-### Assumptions
+### Assumptions:
 To keep it simple and meet all the requirements, I have made following assumptions:
 
 - The application will search data loaded from files.
@@ -136,9 +136,9 @@ Application flow:![search-app](https://user-images.githubusercontent.com/1658005
 - Unit tests and feature tests cover the functionality.
 - Fixtures, helper test classes and custom matchers are used to keep the code DRY
 
-### Trade-offs
+### Trade-offs:
 - Some classes have tight coupling between them. Eg: `DataBuilder` is coupled with `Loader` as the the latter is meant to just pick up files from directory and send to `Parser`. This responsibility is less likely to change if the source data is always going to be in file format. Hence the tight coupling can be justified.
 
-### Improvements
+### Improvements:
 - The data is loaded every time a search command is run. Design can be changed to load once and search multiple times.
 - Some of the tests have mocks which can be reduced by further refactoring of the code.
