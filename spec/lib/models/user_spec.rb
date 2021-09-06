@@ -16,7 +16,7 @@ describe Models::User do
     end
 
     it 'returns correct hash' do
-      expected = user_h.map { |k, v| [k.to_s, v] }.to_h
+      expected = user_h.transform_keys(&:to_s)
       expect(user.to_h).to eq(expected)
     end
   end

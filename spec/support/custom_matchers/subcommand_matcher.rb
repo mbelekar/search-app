@@ -2,18 +2,16 @@
 
 RSpec::Matchers.define :invoke_subcommand do |klass, cmd|
   match do |subject|
-    begin
-      mock = instance_double(klass)
-      allow(klass).to receive(:new).and_return(mock)
+    mock = instance_double(klass)
+    allow(klass).to receive(:new).and_return(mock)
 
-      allow(mock).to receive(:run).and_return(true)
-      subject.run([cmd.to_s])
+    allow(mock).to receive(:run).and_return(true)
+    subject.run([cmd.to_s])
 
-      expect(mock).to have_received(:run).once
-    rescue RSpec::Expectations::ExpectationNotMetError => e
-      @error = e
-      raise
-    end
+    expect(mock).to have_received(:run).once
+  rescue RSpec::Expectations::ExpectationNotMetError => e
+    @error = e
+    raise
   end
 
   failure_message do |subject|

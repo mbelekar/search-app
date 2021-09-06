@@ -16,7 +16,7 @@ describe Models::Ticket do
     end
 
     it 'returns correct hash' do
-      expected = ticket_h.map { |k, v| [k.to_s, v] }.to_h
+      expected = ticket_h.transform_keys(&:to_s)
       expect(ticket.to_h).to eq(expected)
     end
   end

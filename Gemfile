@@ -17,5 +17,6 @@ group 'development' do
   gem 'rspec', '~> 3.10'
   gem 'rubocop', '~> 1.9.1', require: false
   gem 'rubocop-rspec', '~> 2.4'
+  gem 'ruby-debug-ide'
   gem 'simplecov', '~> 0.21.2'
 end
