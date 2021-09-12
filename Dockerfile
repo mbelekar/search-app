@@ -17,4 +17,4 @@ ENV PATH="/app/bin:${PATH}"
 RUN bundle config without development
 RUN bundle install
 
-CMD ["bin/bash"]
+CMD ["/bin/bash"]
