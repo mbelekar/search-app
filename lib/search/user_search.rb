@@ -21,7 +21,7 @@ module Search
     private
 
     def search_users(options)
-      usr = filter(@users, options)
+      usr = filter(@users, options).flat_map(&:to_a)
       usr.each do |u|
         @results.push(users_results(u))
       end
@@ -32,7 +32,7 @@ module Search
       {
         users: u,
         related: {
-          tickets: filter(@tickets, { assignee_id: u._id })
+          tickets: filter(@tickets, { assignee_id: u._id }).flat_map(&:to_a)
         }
       }
     end

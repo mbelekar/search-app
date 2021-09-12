@@ -21,7 +21,7 @@ module Search
     private
 
     def search_tickets(options)
-      tkt = filter(@tickets, options)
+      tkt = filter(@tickets, options).flat_map(&:to_a)
       tkt.each do |t|
         @results.push(tickets_results(t))
       end
@@ -32,7 +32,7 @@ module Search
       {
         tickets: t,
         related: {
-          users: filter(@users, { _id: t.assignee_id })
+          users: filter(@users, { _id: t.assignee_id }).flat_map(&:to_a)
         }
       }
     end
